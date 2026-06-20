@@ -284,7 +284,10 @@ nav.scrolled{background:rgba(8,11,17,.72);backdrop-filter:blur(14px) saturate(14
 .node{fill:var(--ink);stroke:var(--gold);stroke-width:2}
 .node-pulse{fill:none;stroke:var(--gold);stroke-width:1.5;opacity:.5;animation:pulse 3s ease-out infinite}
 @keyframes pulse{0%{r:8;opacity:.6}100%{r:26;opacity:0}}
-.thread-stop{position:absolute;z-index:2;max-width:280px}
+.thread-stop{position:absolute;z-index:3;max-width:290px;
+  background:rgba(9,13,20,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--line-soft);border-radius:14px;padding:1.1rem 1.3rem;
+  box-shadow:0 12px 40px rgba(0,0,0,.4)}
 .thread-stop .pin{font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
 .thread-stop h3{font-size:clamp(1.8rem,4vw,3rem);margin:.3rem 0 .5rem;font-style:italic}
 .thread-stop p{color:var(--mist-dim);font-size:.98rem}
@@ -293,8 +296,10 @@ nav.scrolled{background:rgba(8,11,17,.72);backdrop-filter:blur(14px) saturate(14
 .thread-stop.mid p{margin-left:auto}
 .thread-stop.east{bottom:5%;left:4%;text-align:left}
 @media(max-width:700px){
-  .thread-stop{max-width:62%}
-  .thread-stop.mid{right:3%}
+  .thread-stop{max-width:80%;padding:.95rem 1.1rem}
+  .thread-stop.west{top:2%}
+  .thread-stop.mid{top:40%;right:3%}
+  .thread-stop.east{bottom:3%}
 }
 .thread-foot{text-align:center;margin-top:2rem}
 .thread-foot .big{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.5rem,3.4vw,2.6rem);color:var(--mist);max-width:24ch;margin:0 auto}
@@ -506,7 +511,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       <p class="lede reveal fade" style="--i:2;margin:1rem auto 0;text-align:center;max-width:44ch">One line rose in the west, on the misted Isle of Skye. One rose in the east, by the deep waters of Loch Ness. Follow the thread.</p>
     </div>
 
-    <div class="thread-wrap">
+    <div class="thread-wrap" id="threadWrap">
       <svg class="thread-svg" viewBox="0 0 400 1200" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
         <defs>
           <linearGradient id="threadGrad" x1="0" y1="0" x2="0" y2="1">
@@ -731,7 +736,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   /* ---- scroll-driven: progress bar, parallax, the Thread ---- */
   var bar = document.getElementById('bar');
   var threadPath = document.getElementById('threadPath');
-  var journey = document.getElementById('journey');
+  var threadWrap = document.getElementById('threadWrap');
   var pathLen = 0;
   if(threadPath){
     pathLen = threadPath.getTotalLength();
@@ -753,11 +758,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       var offset = (r.top + r.height/2 - vh/2);
       el.style.transform = 'translate3d(0,' + (offset * parseFloat(el.dataset.speed)).toFixed(1) + 'px,0)';
     }
-    if(threadPath && journey){
-      var jr = journey.getBoundingClientRect();
-      var startAt = vh * 0.82;
-      var traveled = startAt - jr.top;
-      var p = traveled / (jr.height * 0.78);
+    if(threadPath && threadWrap){
+      var wr = threadWrap.getBoundingClientRect();
+      // begin drawing when the thread's top passes 85% of the viewport,
+      // finish only when its bottom rises to 60% of the viewport
+      var p = ((vh * 0.85) - wr.top) / ((vh * 0.25) + wr.height);
       p = p < 0 ? 0 : (p > 1 ? 1 : p);
       threadPath.style.strokeDashoffset = pathLen * (1 - p);
     }
