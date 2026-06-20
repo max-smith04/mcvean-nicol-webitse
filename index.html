@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The House of McVean &amp; Nicol — A Highland Family</title>
+<meta name="description" content="Two Highland bloodlines, one family. The story, names, lore and Gaelic of the McVean-Nicol family." />
+<meta name="color-scheme" content="dark" />
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --ink:#070A0F;
+  --midnight:#0B0F17;
+  --slate:#10151F;
+  --slate-2:#141B27;
+  --mist:#ECE7DB;
+  --mist-dim:#B9C0CC;
+  --muted:#8E97A4;
+  --gold:#E6C36A;
+  --gold-deep:#C9A24B;
+  --gold-soft:rgba(230,195,106,.16);
+  --heather:#A28FCB;
+  --heather-deep:#6E5B97;
+  --loch:#56AE97;
+  --loch-deep:#2E5E54;
+  --tartan:#B14A42;
+  --line:rgba(230,195,106,.18);
+  --line-soft:rgba(236,231,219,.10);
+  --maxw:1180px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--midnight);
+  color:var(--mist);
+  line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  position:relative;
+}
+body::-webkit-scrollbar{width:10px}
+body::-webkit-scrollbar-track{background:var(--ink)}
+body::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold-deep),var(--heather-deep));border-radius:10px}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(230,195,106,.28);color:#fff}
+
+/* ============================================================
+   TYPE
+   ============================================================ */
+h1,h2,h3,.display{font-family:'Cormorant Garamond',serif;font-weight:500;line-height:1.02;letter-spacing:-.01em}
+.eyebrow{
+  font-family:'Cinzel',serif;
+  font-size:clamp(.66rem,1.4vw,.78rem);
+  letter-spacing:.42em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:500;
+  display:inline-block;
+}
+.eyebrow.muted{color:var(--muted)}
+p{max-width:64ch}
+.lede{font-size:clamp(1.05rem,1.6vw,1.3rem);color:var(--mist-dim);font-weight:300}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+section{position:relative;padding:clamp(6rem,13vh,11rem) clamp(1.4rem,5vw,2.5rem)}
+section[id]{scroll-margin-top:88px}
+.wrap{max-width:var(--maxw);margin:0 auto;position:relative;z-index:2}
+.narrow{max-width:820px}
+.divider{display:flex;align-items:center;gap:1rem;justify-content:center;margin:2.4rem auto;max-width:340px;color:var(--gold)}
+.divider .hair{height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--line))}
+.divider .hair.r{background:linear-gradient(90deg,var(--line),transparent)}
+.diamond{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);box-shadow:0 0 14px rgba(230,195,106,.6)}
+
+/* ============================================================
+   ATMOSPHERE — film grain, aurora, vignette
+   ============================================================ */
+.grain{
+  position:fixed;inset:-50%;z-index:9000;pointer-events:none;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 7s steps(6) infinite;
+}
+@keyframes grain{
+  0%{transform:translate(0,0)}10%{transform:translate(-4%,-3%)}20%{transform:translate(2%,4%)}
+  30%{transform:translate(-3%,2%)}40%{transform:translate(4%,-2%)}50%{transform:translate(-2%,3%)}
+  60%{transform:translate(3%,-4%)}70%{transform:translate(-4%,2%)}80%{transform:translate(2%,-3%)}
+  90%{transform:translate(-3%,-2%)}100%{transform:translate(0,0)}
+}
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 0%,transparent 55%,rgba(0,0,0,.55) 100%)}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+#cursor{
+  position:fixed;top:0;left:0;width:32px;height:32px;border:1px solid var(--gold);
+  border-radius:50%;z-index:9500;pointer-events:none;display:none;
+  mix-blend-mode:screen;transition:width .3s var(--ease),height .3s var(--ease),background .3s,border-color .3s;
+}
+#cursor::after{content:"";position:absolute;inset:50%;width:4px;height:4px;margin:-2px;border-radius:50%;background:var(--gold)}
+#cursor.big{width:62px;height:62px;background:rgba(230,195,106,.08);border-color:rgba(230,195,106,.5)}
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+#bar{position:fixed;top:0;left:0;height:2px;width:100%;transform:scaleX(0);transform-origin:0 50%;
+  background:linear-gradient(90deg,var(--gold),var(--heather),var(--loch));z-index:9100;will-change:transform}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:8000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem clamp(1.4rem,5vw,2.5rem);
+  transition:background .5s var(--ease),backdrop-filter .5s,border-color .5s,padding .5s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{background:rgba(8,11,17,.72);backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid var(--line-soft);padding-top:.8rem;padding-bottom:.8rem}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:'Cinzel',serif;letter-spacing:.24em;font-size:.82rem;color:var(--mist)}
+.brand .mono{display:inline-grid;place-items:center;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;color:var(--gold);font-size:.74rem;letter-spacing:.05em}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mist-dim);position:relative;padding:.3rem 0;transition:color .3s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--gold);transition:width .35s var(--ease)}
+.nav-links a:hover{color:var(--mist)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{border:1px solid var(--line);padding:.5rem 1.1rem;border-radius:40px;color:var(--gold)!important;letter-spacing:.2em;transition:background .35s,border-color .35s,color .35s}
+.nav-cta:hover{background:var(--gold);color:var(--ink)!important;border-color:var(--gold)}
+.nav-cta::after{display:none}
+@media(max-width:820px){.nav-links a:not(.nav-cta){display:none}}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{min-height:100vh;display:grid;place-items:center;text-align:center;overflow:hidden;padding-top:6rem}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.aurora{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;will-change:transform}
+.aurora.a{width:55vw;height:55vw;left:-12vw;top:-10vh;background:radial-gradient(circle,var(--heather-deep),transparent 65%);animation:drift1 26s ease-in-out infinite}
+.aurora.b{width:48vw;height:48vw;right:-14vw;top:6vh;background:radial-gradient(circle,var(--loch-deep),transparent 65%);animation:drift2 30s ease-in-out infinite}
+.aurora.c{width:60vw;height:60vw;left:18vw;bottom:-30vh;background:radial-gradient(circle,rgba(201,162,75,.5),transparent 60%);animation:drift3 34s ease-in-out infinite}
+@keyframes drift1{50%{transform:translate(8vw,6vh) scale(1.15)}}
+@keyframes drift2{50%{transform:translate(-7vw,8vh) scale(1.1)}}
+@keyframes drift3{50%{transform:translate(5vw,-7vh) scale(1.2)}}
+.stars{position:absolute;inset:0;background-image:
+  radial-gradient(1px 1px at 20% 30%,rgba(255,255,255,.7),transparent),
+  radial-gradient(1px 1px at 70% 22%,rgba(255,255,255,.5),transparent),
+  radial-gradient(1px 1px at 40% 70%,rgba(255,255,255,.6),transparent),
+  radial-gradient(1px 1px at 85% 60%,rgba(255,255,255,.45),transparent),
+  radial-gradient(1px 1px at 60% 85%,rgba(255,255,255,.5),transparent),
+  radial-gradient(1.5px 1.5px at 12% 80%,rgba(230,195,106,.6),transparent),
+  radial-gradient(1.5px 1.5px at 92% 35%,rgba(230,195,106,.5),transparent);
+  opacity:.6}
+#embers{position:absolute;inset:0;overflow:hidden}
+.ember{position:absolute;bottom:-10px;width:3px;height:3px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 8px rgba(230,195,106,.8);transform:scale(var(--s,1));
+  animation:rise var(--d,12s) linear var(--delay,0s) infinite}
+@keyframes rise{to{transform:translate(var(--x,0),-104vh) scale(var(--s,1));opacity:0}}
+
+.hero-content{position:relative;z-index:3;padding:0 1rem}
+.hero .kicker{display:block;margin-bottom:1.6rem}
+.hero-title{display:flex;flex-direction:column;align-items:center;gap:.1rem}
+.line-mask{overflow:hidden;display:block;padding:.06em 0}
+.display.xl{font-size:clamp(3.6rem,15vw,12rem);font-weight:600;color:var(--mist);line-height:.92}
+/* gradient lives on the split chars so it survives the per-letter spans */
+.display.xl .char{background:linear-gradient(180deg,#fff 0%,var(--mist) 42%,var(--gold) 132%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.amp-row{display:flex;align-items:center;gap:1.3rem;justify-content:center;margin:.1em 0}
+.amp-row .rule{height:1px;width:clamp(40px,12vw,130px);background:linear-gradient(90deg,transparent,var(--gold))}
+.amp-row .rule.r{background:linear-gradient(90deg,var(--gold),transparent)}
+.amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(2rem,6vw,4rem);color:var(--gold)}
+.hero-sub{margin:2.2rem auto 0;max-width:50ch;color:var(--mist-dim);font-weight:300;font-size:clamp(1rem,1.5vw,1.18rem)}
+.hero-thistle{margin:2.4rem auto 0;width:46px;color:var(--gold);opacity:.9}
+.scroll-cue{position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);z-index:3;
+  font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);
+  display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.scroll-cue .track{width:1px;height:46px;background:linear-gradient(var(--gold),transparent);position:relative;overflow:hidden}
+.scroll-cue .track::after{content:"";position:absolute;top:0;left:0;width:100%;height:40%;background:var(--gold);animation:cue 2.2s var(--ease) infinite}
+@keyframes cue{0%{transform:translateY(-100%)}60%,100%{transform:translateY(280%)}}
+
+/* split chars */
+.char{display:inline-block;will-change:transform,opacity}
+.js .split .char{transform:translateY(112%) rotate(8deg);opacity:0;animation:charIn 1s var(--ease-out) forwards;animation-delay:calc(var(--ci)*.04s + .25s)}
+@keyframes charIn{to{transform:none;opacity:1}}
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.js .reveal{opacity:0;transform:translateY(38px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:calc(var(--i,0)*.09s)}
+.js .reveal.left{transform:translateX(-44px)}
+.js .reveal.right{transform:translateX(44px)}
+.js .reveal.fade{transform:none}
+.js .reveal.scale{transform:scale(.94)}
+.reveal.is-visible{opacity:1!important;transform:none!important}
+
+/* ============================================================
+   SECTION HEADERS
+   ============================================================ */
+.sec-head{margin-bottom:clamp(2.5rem,6vh,4.5rem)}
+.sec-head h2{font-size:clamp(2.6rem,8vw,6rem);margin:.7rem 0 .3rem}
+.sec-head .gaelic{font-style:italic;color:var(--heather);font-size:clamp(1.1rem,2vw,1.5rem);font-family:'Cormorant Garamond',serif}
+
+/* ============================================================
+   PROLOGUE
+   ============================================================ */
+.prologue{text-align:center}
+.prologue .big{font-size:clamp(2rem,5.5vw,4rem);line-height:1.12;font-style:italic;max-width:16ch;margin:0 auto;color:var(--mist)}
+.prologue .big em{font-style:normal;color:var(--gold)}
+.prologue p{margin:2rem auto 0;text-align:center;color:var(--mist-dim)}
+
+/* ============================================================
+   CHAPTERS
+   ============================================================ */
+.chapter{position:relative}
+.chap-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,5rem);align-items:start}
+@media(max-width:880px){.chap-grid{grid-template-columns:1fr;gap:2.5rem}}
+.chap-body p{font-size:clamp(1.02rem,1.3vw,1.16rem);color:var(--mist-dim)}
+.dropcap::first-letter{font-family:'Cormorant Garamond',serif;font-size:4.4em;float:left;line-height:.74;padding:.06em .12em 0 0;color:var(--gold);font-weight:600}
+.giant-index{position:absolute;top:-3rem;right:0;font-family:'Cormorant Garamond',serif;font-size:clamp(8rem,26vw,22rem);
+  line-height:1;color:transparent;-webkit-text-stroke:1px rgba(230,195,106,.12);z-index:0;pointer-events:none;user-select:none}
+
+.facts{display:grid;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden}
+.fact{background:var(--slate);padding:1.4rem 1.5rem;display:flex;gap:1.1rem;align-items:flex-start;transition:background .4s var(--ease)}
+.fact:hover{background:var(--slate-2)}
+.fact .ic{flex:none;width:38px;height:38px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;color:var(--gold)}
+.fact h4{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem;font-weight:500}
+.fact p{font-size:.96rem;color:var(--mist-dim);max-width:none}
+
+.legend{margin-top:2rem;border:1px solid var(--line);border-radius:16px;padding:clamp(1.6rem,3vw,2.4rem);
+  background:linear-gradient(135deg,rgba(110,91,151,.12),rgba(46,94,84,.08));position:relative;overflow:hidden}
+.legend::before{content:"";position:absolute;top:-40%;right:-10%;width:50%;height:180%;
+  background:radial-gradient(circle,rgba(230,195,106,.16),transparent 70%)}
+.legend .tag{font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase}
+.legend h3{font-size:clamp(1.6rem,3vw,2.3rem);margin:.5rem 0 .8rem;font-style:italic}
+.legend p{color:var(--mist-dim);position:relative}
+
+.motto-stone{margin-top:2.2rem;text-align:center;padding:2rem;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.motto-stone .m{font-family:'Cinzel',serif;font-size:clamp(1.1rem,2.6vw,1.8rem);letter-spacing:.12em;color:var(--mist);text-transform:uppercase}
+.motto-stone .t{margin-top:.7rem;font-style:italic;color:var(--muted);font-family:'Cormorant Garamond',serif;font-size:1.1rem}
+
+/* emblem holder */
+.emblem{position:sticky;top:120px;display:grid;place-items:center;padding:2rem}
+.emblem svg{width:min(80%,300px);height:auto;color:var(--gold)}
+.draw path,.draw circle,.draw line,.draw polyline{
+  stroke-dasharray:var(--len,1200);stroke-dashoffset:var(--len,1200);
+}
+.draw.is-visible path,.draw.is-visible circle,.draw.is-visible line,.draw.is-visible polyline{
+  animation:draw 2.4s var(--ease-out) forwards;animation-delay:calc(var(--d,0)*.25s)}
+@keyframes draw{to{stroke-dashoffset:0}}
+.emblem .cap{margin-top:1.4rem;text-align:center;font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
+
+/* ============================================================
+   INTERSTITIAL YEAR
+   ============================================================ */
+.interstitial{text-align:center;padding-block:clamp(4rem,10vh,8rem);overflow:hidden}
+.year{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(6rem,28vw,24rem);line-height:.9;
+  background:linear-gradient(180deg,var(--gold),transparent 130%);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.02em}
+.interstitial .cap{font-family:'Cinzel',serif;letter-spacing:.4em;text-transform:uppercase;color:var(--mist-dim);font-size:clamp(.7rem,1.6vw,.9rem);margin-top:-.3em}
+
+/* ============================================================
+   THE THREAD (scroll-drawn SVG)
+   ============================================================ */
+#journey{background:linear-gradient(180deg,var(--midnight),var(--ink) 50%,var(--midnight));--p:0}
+.thread-wrap{position:relative;min-height:170vh}
+.thread-svg{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+#threadPath{fill:none;stroke:url(#threadGrad);stroke-width:2.4;stroke-linecap:round;
+  filter:drop-shadow(0 0 6px rgba(230,195,106,.5))}
+.thread-ghost{fill:none;stroke:rgba(236,231,219,.07);stroke-width:2.4;stroke-dasharray:2 9;stroke-linecap:round}
+.node{fill:var(--ink);stroke:var(--gold);stroke-width:2}
+.node-pulse{fill:none;stroke:var(--gold);stroke-width:1.5;opacity:.5;animation:pulse 3s ease-out infinite}
+@keyframes pulse{0%{r:8;opacity:.6}100%{r:26;opacity:0}}
+.thread-stop{position:absolute;z-index:2;max-width:280px}
+.thread-stop .pin{font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.thread-stop h3{font-size:clamp(1.8rem,4vw,3rem);margin:.3rem 0 .5rem;font-style:italic}
+.thread-stop p{color:var(--mist-dim);font-size:.98rem}
+.thread-stop.west{top:4%;left:4%;text-align:left}
+.thread-stop.mid{top:46%;right:4%;text-align:right}
+.thread-stop.mid p{margin-left:auto}
+.thread-stop.east{bottom:5%;left:4%;text-align:left}
+@media(max-width:700px){
+  .thread-stop{max-width:62%}
+  .thread-stop.mid{right:3%}
+}
+.thread-foot{text-align:center;margin-top:2rem}
+.thread-foot .big{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.5rem,3.4vw,2.6rem);color:var(--mist);max-width:24ch;margin:0 auto}
+
+/* ============================================================
+   UNION
+   ============================================================ */
+#union{background:
+  linear-gradient(rgba(11,15,23,.92),rgba(11,15,23,.92)),
+  repeating-linear-gradient(0deg,rgba(86,174,151,.5) 0 2px,transparent 2px 22px),
+  repeating-linear-gradient(90deg,rgba(162,143,203,.5) 0 2px,transparent 2px 22px),
+  repeating-linear-gradient(0deg,rgba(230,195,106,.4) 0 1px,transparent 1px 44px);
+  text-align:center}
+.union-emblems{display:flex;align-items:center;justify-content:center;gap:clamp(1rem,5vw,3.5rem);margin:3rem 0}
+.union-emblems .em{width:clamp(70px,12vw,120px);color:var(--gold);opacity:.92}
+.union-emblems .knot{width:clamp(40px,7vw,80px);color:var(--heather)}
+.union p{margin:0 auto;color:var(--mist-dim)}
+
+/* ============================================================
+   LORE / DID YOU KNOW
+   ============================================================ */
+.dyk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.2rem;margin-top:1rem}
+.dyk{position:relative;padding:2rem 1.7rem;border:1px solid var(--line-soft);border-radius:16px;background:var(--slate);
+  overflow:hidden;transition:transform .5s var(--ease),border-color .5s,background .5s}
+.dyk:hover{transform:translateY(-6px);border-color:var(--line);background:var(--slate-2)}
+.dyk::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 0% 0%,var(--gold-soft),transparent 60%);opacity:0;transition:opacity .5s}
+.dyk:hover::before{opacity:1}
+.dyk .n{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--gold);line-height:1;display:block;margin-bottom:.6rem;position:relative}
+.dyk p{font-size:1rem;color:var(--mist-dim);position:relative;max-width:none}
+.dyk strong{color:var(--mist);font-weight:600}
+
+/* ============================================================
+   GAELIC
+   ============================================================ */
+.word-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.1rem;margin-top:1rem}
+.word{position:relative;border:1px solid var(--line-soft);border-radius:16px;padding:1.8rem 1.6rem;background:var(--slate);
+  transition:border-color .5s,background .5s,transform .5s var(--ease)}
+.word:hover{border-color:var(--line);background:var(--slate-2);transform:translateY(-4px)}
+.word .term{font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--mist);font-style:italic}
+.word .mean{display:block;color:var(--gold);font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;margin:.5rem 0 .8rem}
+.word .use{font-size:.94rem;color:var(--muted);max-width:none}
+.word .say{display:inline-block;margin-top:.8rem;font-size:.8rem;color:var(--heather);font-style:italic;font-family:'Cormorant Garamond',serif}
+
+/* ============================================================
+   CLOSING
+   ============================================================ */
+#closing{text-align:center;background:radial-gradient(120% 100% at 50% 100%,rgba(110,91,151,.18),transparent 60%)}
+#closing .big{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,6vw,4.4rem);font-style:italic;line-height:1.1;max-width:18ch;margin:0 auto;
+  background:linear-gradient(180deg,#fff,var(--gold) 140%);-webkit-background-clip:text;background-clip:text;color:transparent}
+#closing .msg{margin:2.4rem auto 0;max-width:54ch;color:var(--mist-dim);font-size:clamp(1.02rem,1.4vw,1.18rem);font-weight:300}
+.blessing{margin-top:2.6rem;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.3rem,3vw,2rem);color:var(--heather)}
+.slainte{margin-top:2.4rem;display:inline-flex;align-items:center;gap:.7rem;font-family:'Cinzel',serif;letter-spacing:.24em;text-transform:uppercase;font-size:.78rem;
+  color:var(--ink);background:linear-gradient(135deg,var(--gold),var(--gold-deep));padding:1rem 2rem;border-radius:50px;border:none;cursor:pointer;
+  transition:transform .4s var(--ease),box-shadow .4s;box-shadow:0 8px 30px rgba(230,195,106,.25)}
+.slainte:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(230,195,106,.4)}
+.slainte:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{padding:clamp(3rem,8vh,5rem) clamp(1.4rem,5vw,2.5rem) 3rem;border-top:1px solid var(--line-soft);text-align:center}
+footer .mono{display:inline-grid;place-items:center;width:52px;height:52px;border:1px solid var(--line);border-radius:50%;color:var(--gold);font-family:'Cinzel',serif;letter-spacing:.04em;margin:0 auto 1.4rem}
+footer .mottos{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mist-dim);margin-bottom:.8rem}
+footer .mottos span{color:var(--gold)}
+footer .made{color:var(--muted);font-size:.86rem}
+footer .note{margin:1.4rem auto 0;max-width:60ch;color:rgba(142,151,164,.7);font-size:.76rem;line-height:1.6}
+
+/* focus */
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .js .reveal,.js .split .char{opacity:1!important;transform:none!important}
+  .grain,.aurora,#embers,.node-pulse,.scroll-cue .track::after{animation:none!important}
+  #threadPath{stroke-dashoffset:0!important}
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div id="cursor" aria-hidden="true"></div>
+<div id="bar" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav id="nav" aria-label="Primary">
+  <a class="brand" href="#top" aria-label="McVean and Nicol — home">
+    <span class="mono">M&middot;N</span>
+    <span>McVean &middot; Nicol</span>
+  </a>
+  <div class="nav-links">
+    <a href="#names">The Names</a>
+    <a href="#journey">The Thread</a>
+    <a href="#lore">Lore</a>
+    <a href="#gaelic">Gaelic</a>
+    <a class="nav-cta" href="#closing">Slàinte</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="aurora a"></div>
+    <div class="aurora b"></div>
+    <div class="aurora c"></div>
+    <div class="stars" data-speed="0.04"></div>
+    <div id="embers"></div>
+  </div>
+  <div class="hero-content">
+    <span class="eyebrow kicker">Est. in the Highlands of Scotland</span>
+    <h1 class="hero-title">
+      <span class="line-mask"><span class="display xl split">McVean</span></span>
+      <span class="amp-row reveal fade"><span class="rule"></span><span class="amp">&amp;</span><span class="rule r"></span></span>
+      <span class="line-mask"><span class="display xl split">Nicol</span></span>
+    </h1>
+    <p class="hero-sub reveal fade" style="--i:6">Two Highland bloodlines — one from the lochs of the east, one from the misted isles of the west — woven into a single family.</p>
+    <svg class="hero-thistle reveal fade" style="--i:8" viewBox="0 0 120 160" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M60 158 L60 92"/>
+      <path d="M60 138 C42 138 30 128 25 110 C42 113 55 121 60 136"/>
+      <path d="M60 138 C78 138 90 128 95 110 C78 113 65 121 60 136"/>
+      <path d="M60 92 C45 92 41 78 45 67 C51 57 69 57 75 67 C79 78 75 92 60 92 Z"/>
+      <path d="M49 70 L71 84 M71 70 L49 84 M60 66 L60 90"/>
+      <path d="M48 65 C45 50 43 40 41 30"/>
+      <path d="M54 63 C53 47 52 35 51 23"/>
+      <path d="M60 62 L60 17"/>
+      <path d="M66 63 C67 47 68 35 69 23"/>
+      <path d="M72 65 C75 50 77 40 79 30"/>
+    </svg>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><span>Scroll to begin</span><span class="track"></span></div>
+</header>
+
+<!-- PROLOGUE -->
+<section class="prologue">
+  <div class="wrap narrow">
+    <p class="eyebrow muted reveal fade">Prologue</p>
+    <p class="big reveal fade" style="--i:1">Every family is a story <em>still being told.</em></p>
+    <div class="divider reveal fade" style="--i:2"><span class="hair"></span><span class="diamond"></span><span class="hair r"></span></div>
+    <p class="reveal fade" style="--i:3">In the old tongue, the word for family is <em style="color:var(--gold);font-style:italic">teaghlach</em> — literally <em>“household,”</em> all those who gather at a single hearth. This is the story of the two names that gathered at ours.</p>
+  </div>
+</section>
+
+<!-- CHAPTER I — McVEAN -->
+<section class="chapter" id="names">
+  <span class="giant-index" aria-hidden="true">I</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow reveal fade">Chapter I &middot; The Eastern Line</span>
+      <h2 class="reveal fade" style="--i:1">McVean</h2>
+      <span class="gaelic reveal fade" style="--i:2">Gaelic — <em>Mac Bheathain</em></span>
+    </div>
+    <div class="chap-grid">
+      <div class="chap-body">
+        <p class="dropcap reveal fade">McVean comes from the Gaelic <em>Mac Bheathain</em> — “son of Beathan.” At its very root lies <em>beatha</em>, the Gaelic word for <strong style="color:var(--gold)">life</strong>. To carry this name is to be, quite literally, a child of life.</p>
+        <div class="facts reveal" style="margin-top:1.8rem">
+          <div class="fact"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 3.13a4 4 0 0 1 0 7.75"/><circle cx="9" cy="7" r="4"/><path d="M17 21v-2a4 4 0 0 0-3-3.87"/></svg></span><div><h4>The Clan</h4><p>A sept of <strong style="color:var(--mist)">Clan MacBean</strong>, within the great Clan Chattan confederation of the central Highlands.</p></div></div>
+          <div class="fact"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9 2 7l3-1 1-3 2 2 2-2 1 3 3 1-2 2M12 12c3 0 6 2 6 6 0 2-1 4-3 4M12 12c-3 0-6 2-6 6 0 2 1 4 3 4"/><circle cx="9.5" cy="9.5" r=".6" fill="currentColor"/><circle cx="14.5" cy="9.5" r=".6" fill="currentColor"/></svg></span><div><h4>The Emblem</h4><p>The <strong style="color:var(--mist)">wildcat</strong> — the “Highland tiger,” one of Britain’s rarest and fiercest beasts. Fierce, and never tamed.</p></div></div>
+          <div class="fact"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4Z"/></svg></span><div><h4>The Motto</h4><p>“Touch not the cat bot a glove” — never lay a hand on the wildcat unguarded.</p></div></div>
+          <div class="fact"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="2.6"/></svg></span><div><h4>The Homeland</h4><p><strong style="color:var(--mist)">Kinchyle</strong>, on the shores of <strong style="color:var(--mist)">Loch Ness</strong> near Inverness — the eastern heartland.</p></div></div>
+        </div>
+        <div class="legend reveal">
+          <span class="tag">The Legend</span>
+          <h3>Gillies Mòr — “Big Gillies”</h3>
+          <p>Gillies MacBean was a towering Highlander remembered for a legendary last stand at the <strong style="color:var(--mist)">Battle of Culloden in 1746</strong> — said to have held a breach in a wall against an army, cutting down attacker after attacker before he fell. Centuries on, the clan still tells his name.</p>
+        </div>
+        <div class="motto-stone reveal fade">
+          <div class="m">Touch not the cat bot a glove</div>
+          <div class="t">— the warning carried by the wildcat of Clan Chattan</div>
+        </div>
+      </div>
+
+      <aside class="emblem" aria-hidden="true">
+        <svg class="draw" viewBox="0 0 200 240" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="--len:520">
+          <circle cx="100" cy="120" r="92" style="--len:580;--d:0"/>
+          <circle cx="100" cy="120" r="80" stroke-opacity=".5" style="--len:510;--d:.2"/>
+          <!-- wildcat head -->
+          <path d="M62 96 L70 70 L86 92" style="--d:1"/>
+          <path d="M138 96 L130 70 L114 92" style="--d:1.1"/>
+          <path d="M68 92 C60 110 60 132 74 150 C84 162 116 162 126 150 C140 132 140 110 132 92" style="--len:300;--d:1.3"/>
+          <path d="M84 116 L92 122 M116 116 L108 122" style="--d:1.6"/>
+          <path d="M100 128 L100 138 M100 138 L92 144 M100 138 L108 144" style="--d:1.8"/>
+          <path d="M76 132 L52 126 M76 138 L54 140 M124 132 L148 126 M124 138 L146 140" style="--len:120;--d:2"/>
+          <line x1="100" y1="200" x2="100" y2="224" style="--len:30;--d:2.2"/>
+        </svg>
+        <div class="cap">The wildcat &middot; Clan Chattan</div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- INTERSTITIAL YEAR -->
+<section class="interstitial">
+  <div class="wrap">
+    <div class="year" data-count="1746" aria-label="1746">1746</div>
+    <div class="cap reveal fade">Culloden &middot; where a MacBean became legend</div>
+  </div>
+</section>
+
+<!-- THE THREAD -->
+<section id="journey">
+  <div class="wrap" style="max-width:1280px">
+    <div class="sec-head" style="text-align:center">
+      <span class="eyebrow reveal fade">The Thread That Binds</span>
+      <h2 class="reveal fade" style="--i:1">From isle to loch</h2>
+      <p class="lede reveal fade" style="--i:2;margin:1rem auto 0;text-align:center;max-width:44ch">One line rose in the west, on the misted Isle of Skye. One rose in the east, by the deep waters of Loch Ness. Follow the thread.</p>
+    </div>
+
+    <div class="thread-wrap">
+      <svg class="thread-svg" viewBox="0 0 400 1200" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="threadGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#A28FCB"/>
+            <stop offset="50%" stop-color="#E6C36A"/>
+            <stop offset="100%" stop-color="#56AE97"/>
+          </linearGradient>
+        </defs>
+        <path class="thread-ghost" d="M70 40 C70 180 330 200 330 360 C330 540 70 560 70 740 C70 920 330 940 330 1160"/>
+        <path id="threadPath" d="M70 40 C70 180 330 200 330 360 C330 540 70 560 70 740 C70 920 330 940 330 1160"/>
+        <!-- west node -->
+        <circle class="node-pulse" cx="70" cy="40" r="8"/>
+        <circle class="node" cx="70" cy="40" r="8"/>
+        <!-- mid node -->
+        <circle class="node" cx="330" cy="360" r="6"/>
+        <circle class="node" cx="70" cy="740" r="6"/>
+        <!-- east node -->
+        <circle class="node-pulse" cx="330" cy="1160" r="8"/>
+        <circle class="node" cx="330" cy="1160" r="8"/>
+      </svg>
+
+      <div class="thread-stop west reveal left">
+        <span class="pin">The Western Line</span>
+        <h3>Isle of Skye</h3>
+        <p><em style="color:var(--heather)">Eilean a’ Cheò</em> — “the Misty Isle.” Where the Nicols held their ancient seat at Scorrybreac, above Portree harbour.</p>
+      </div>
+      <div class="thread-stop mid reveal right">
+        <span class="pin">Across the Highlands</span>
+        <h3>The journey</h3>
+        <p>Glen by glen, sea-loch by sea-loch — the two lines travel toward one another across the spine of Scotland.</p>
+      </div>
+      <div class="thread-stop east reveal left">
+        <span class="pin">The Eastern Line</span>
+        <h3>Loch Ness</h3>
+        <p><em style="color:var(--loch)">Loch Nis</em> — deep and dark. Near its shores at Kinchyle stood the lands of the MacBeans, kin of McVean.</p>
+      </div>
+    </div>
+
+    <div class="thread-foot">
+      <p class="big reveal fade">Where the thread is tied — that is where the McVean-Nicol family begins.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER II — NICOL -->
+<section class="chapter">
+  <span class="giant-index" aria-hidden="true">II</span>
+  <div class="wrap">
+    <div class="sec-head" style="text-align:right">
+      <span class="eyebrow reveal fade">Chapter II &middot; The Western Line</span>
+      <h2 class="reveal fade" style="--i:1">Nicol</h2>
+      <span class="gaelic reveal fade" style="--i:2">From <em>Nicholas</em> — Greek <em>Nikolaos</em></span>
+    </div>
+    <div class="chap-grid" style="grid-template-columns:.85fr 1.15fr">
+      <aside class="emblem" aria-hidden="true" style="order:0">
+        <svg class="draw" viewBox="0 0 200 240" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="--len:520">
+          <circle cx="100" cy="120" r="92" style="--len:580;--d:0"/>
+          <circle cx="100" cy="120" r="80" stroke-opacity=".5" style="--len:510;--d:.2"/>
+          <!-- hawk / bird of the isles -->
+          <path d="M100 78 C108 78 112 84 112 92 C112 100 106 106 100 106 C94 106 88 100 88 92 C88 84 92 78 100 78 Z" style="--len:120;--d:1"/>
+          <path d="M96 90 L90 88 M104 90 L110 88" style="--d:1.2"/>
+          <path d="M100 106 C100 120 100 130 100 150" style="--len:60;--d:1.4"/>
+          <path d="M100 110 C70 108 46 120 36 146 C66 142 88 134 100 124" style="--len:240;--d:1.6"/>
+          <path d="M100 110 C130 108 154 120 164 146 C134 142 112 134 100 124" style="--len:240;--d:1.7"/>
+          <path d="M100 124 C80 138 70 156 70 178 C86 168 96 156 100 142" style="--len:150;--d:1.9"/>
+          <path d="M100 124 C120 138 130 156 130 178 C114 168 104 156 100 142" style="--len:150;--d:2"/>
+          <path d="M92 150 L100 200 L108 150" style="--len:120;--d:2.2"/>
+        </svg>
+        <div class="cap">The hawk &middot; clans of Skye</div>
+      </aside>
+      <div class="chap-body">
+        <p class="dropcap reveal fade">Nicol descends from <em>Nicholas</em>, and through it from the Greek <em>Nikolaos</em>: <em>nikē</em>, “victory,” and <em>laos</em>, “the people.” The name means <strong style="color:var(--gold)">“victory of the people.”</strong> Triumph is written into it.</p>
+        <div class="facts reveal" style="margin-top:1.8rem">
+          <div class="fact"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 3.13a4 4 0 0 1 0 7.75"/><circle cx="9" cy="7" r="4"/><path d="M17 21v-2a4 4 0 0 0-3-3.87"/></svg></span><div><h4>The Clan</h4><p>Linked to <strong style="color:var(--mist)">Clan Nicolson / MacNeacail</strong> — in Gaelic, <em>Mac Neacail</em>.</p></div></div>
+          <div class="fact"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="2.6"/></svg></span><div><h4>The Homeland</h4><p><strong style="color:var(--mist)">Scorrybreac</strong>, above Portree on the Isle of Skye — counted among the island’s oldest families.</p></div></div>
+          <div class="fact"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4Z"/></svg></span><div><h4>The Motto</h4><p><em>Generositate</em> — “by generosity.” A name to be lived openhandedly.</p></div></div>
+          <div class="fact"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l2.5 6.5L22 12l-6.5 2.5L13 21l-2.5-6.5L4 12l6.5-2.5L13 3Z"/></svg></span><div><h4>The Saint</h4><p>Its patron, <strong style="color:var(--mist)">Nicholas of Myra</strong>, protector of sailors — and the very origin of Santa Claus.</p></div></div>
+        </div>
+        <div class="legend reveal">
+          <span class="tag">A Curious Thing</span>
+          <h3>From Skye to Santa</h3>
+          <p>Every December, the world calls on a figure born from the same root as your name. <strong style="color:var(--mist)">Saint Nicholas</strong> → <em>Sinterklaas</em> → Santa Claus. Somewhere in the family tree, Nicol and Father Christmas share a grandfather of a name.</p>
+        </div>
+        <div class="motto-stone reveal fade">
+          <div class="m">Generositate</div>
+          <div class="t">— “by generosity,” the word of the Nicolsons</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNION -->
+<section id="union" class="union">
+  <div class="wrap narrow">
+    <span class="eyebrow reveal fade">The Union</span>
+    <h2 class="reveal fade" style="--i:1;font-size:clamp(2.4rem,7vw,5rem);margin:.6rem 0 0">Two lines, one fire</h2>
+    <div class="union-emblems reveal scale" aria-hidden="true">
+      <svg class="em" viewBox="0 0 120 160" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M30 20 38 12 50 26M90 20 82 12 70 26M36 24 C28 44 28 70 44 86 C54 96 66 96 76 86 C92 70 92 44 84 24M50 50 56 56M70 50 64 56M60 60 60 72M44 66 22 60M44 72 24 74M76 66 98 60M76 72 96 74"/></svg>
+      <svg class="knot" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M50 14 C70 14 70 42 50 42 C30 42 30 14 50 14M50 86 C70 86 70 58 50 58 C30 58 30 86 50 86M14 50 C14 30 42 30 42 50 C42 70 14 70 14 50M86 50 C86 30 58 30 58 50 C58 70 86 70 86 50"/></svg>
+      <svg class="em" viewBox="0 0 120 160" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M60 36 C68 36 72 44 72 52 C72 62 64 66 60 66 C56 66 48 62 48 52 C48 44 52 36 60 36ZM55 50 49 48M65 50 71 48M60 66 60 96M60 70 C36 68 18 82 12 104 C40 100 54 90 60 80M60 70 C84 68 102 82 108 104 C80 100 66 90 60 80M52 96 60 140 68 96"/></svg>
+    </div>
+    <p class="reveal fade" style="--i:2">When a McVean weds a Nicol, the Highlands themselves are joined — the eastern lochs tied to the western isles, the wildcat of Clan Chattan to the hawks of Skye. Two ancient threads, knotted into one. What remains is the family you belong to now.</p>
+  </div>
+</section>
+
+<!-- LORE / DID YOU KNOW -->
+<section id="lore">
+  <div class="wrap">
+    <div class="sec-head" style="text-align:center">
+      <span class="eyebrow reveal fade">Lore &amp; Wonders</span>
+      <h2 class="reveal fade" style="--i:1">Did you know?</h2>
+    </div>
+    <div class="dyk-grid">
+      <div class="dyk reveal" style="--i:0"><span class="n">01</span><p><strong>“Mac” means “son of.”</strong> Both names begin as someone’s child — McVean, son of Beathan; Nicol, of Nicholas. You come from a long line of someones.</p></div>
+      <div class="dyk reveal" style="--i:1"><span class="n">02</span><p>The Highland <strong>wildcat</strong> was so untameable it became a warning carved into a crest: <em>touch not the cat without a glove.</em></p></div>
+      <div class="dyk reveal" style="--i:2"><span class="n">03</span><p>The <strong>thistle</strong> — Scotland’s emblem — is said to have saved a sleeping army when a barefoot raider trod on one and cried out in the dark.</p></div>
+      <div class="dyk reveal" style="--i:3"><span class="n">04</span><p><strong>Nicol shares its root with Santa Claus.</strong> Both grow from Saint Nicholas, protector of sailors and giver of gifts.</p></div>
+      <div class="dyk reveal" style="--i:4"><span class="n">05</span><p><strong>Culloden, 1746</strong>, was the last pitched battle fought on British soil — and a kinsman of McVean was counted among its heroes.</p></div>
+      <div class="dyk reveal" style="--i:5"><span class="n">06</span><p>Skye’s Gaelic name, <em>Eilean a’ Cheò</em>, means <strong>“the Misty Isle”</strong> — the western cradle of the Nicol line.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GAELIC -->
+<section id="gaelic">
+  <div class="wrap">
+    <div class="sec-head" style="text-align:center">
+      <span class="eyebrow reveal fade">The Old Tongue</span>
+      <h2 class="reveal fade" style="--i:1">Words for the family table</h2>
+      <p class="lede reveal fade" style="--i:2;margin:1rem auto 0;max-width:46ch">A handful of Gaelic to share — at a toast, a greeting, or a quiet word of love.</p>
+    </div>
+    <div class="word-grid">
+      <div class="word reveal" style="--i:0"><span class="term">Slàinte mhath</span><span class="mean">Good health</span><p class="use">The toast. Glasses up, eyes met — and answered with <em>“slàinte mhòr.”</em></p><span class="say">say: slahn-juh vah</span></div>
+      <div class="word reveal" style="--i:1"><span class="term">Teaghlach</span><span class="mean">Family · household</span><p class="use">All those who share one hearth and one name.</p><span class="say">say: chö-lach</span></div>
+      <div class="word reveal" style="--i:2"><span class="term">Mo ghràdh</span><span class="mean">My love · my dear</span><p class="use">For the ones held closest of all.</p><span class="say">say: mo ghraah</span></div>
+      <div class="word reveal" style="--i:3"><span class="term">Alba</span><span class="mean">Scotland</span><p class="use">The homeland, spoken in its own ancient tongue.</p><span class="say">say: AL-a-pa</span></div>
+      <div class="word reveal" style="--i:4"><span class="term">Mìle fàilte</span><span class="mean">A thousand welcomes</span><p class="use">How a Highlander greets their own at the door.</p><span class="say">say: mee-luh fahl-tchuh</span></div>
+      <div class="word reveal" style="--i:5"><span class="term">Cuimhnich</span><span class="mean">Remember</span><p class="use">Remember the line you come from — and carry it well.</p><span class="say">say: koo-in-yich</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section id="closing">
+  <div class="wrap narrow">
+    <span class="eyebrow reveal fade">For the McVean-Nicol Family</span>
+    <p class="big reveal fade" style="--i:1">Wherever we scatter, the hearth is one.</p>
+    <p class="msg reveal fade" style="--i:2">A name is how a family carries its past into the future. <em style="color:var(--mist)">McVean</em> and <em style="color:var(--mist)">Nicol</em> have travelled centuries — through Highland glens, across cold seas, down through every generation, into this room, to us. However far any of us roams, we belong to the same fire. Hold the names well. Pass them on.</p>
+    <p class="blessing reveal fade" style="--i:3">Mìle fàilte — a thousand welcomes home.</p>
+    <button class="slainte reveal fade" style="--i:4" id="slainte" type="button">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 22h8M12 11v11M5 3h14l-1 8a6 6 0 0 1-12 0L5 3Z"/></svg>
+      Slàinte mhath
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="mono">M&middot;N</div>
+  <div class="mottos"><span>Touch not the cat bot a glove</span> &nbsp;&middot;&nbsp; <span>Generositate</span></div>
+  <p class="made">Made with love for the McVean-Nicol family &middot; 2026</p>
+  <p class="note">Clan history, septs and mottos are told many ways across many sources; these were gathered for the joy of the family, not as an official registry. Wear the stories lightly — and proudly.</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* ---- split headings into chars ---- */
+  document.querySelectorAll('.split').forEach(function(el){
+    var text = el.textContent, frag = document.createDocumentFragment(), i = 0;
+    text.split('').forEach(function(ch){
+      var s = document.createElement('span');
+      s.className = 'char';
+      s.style.setProperty('--ci', i++);
+      s.textContent = ch === ' ' ? ' ' : ch;
+      frag.appendChild(s);
+    });
+    el.textContent = '';
+    el.appendChild(frag);
+  });
+
+  /* ---- reveal on scroll ---- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal, .draw').forEach(function(el){ io.observe(el); });
+
+  /* ---- prepare SVG draw lengths ---- */
+  document.querySelectorAll('.draw').forEach(function(svg){
+    svg.querySelectorAll('path,circle,line,polyline').forEach(function(p){
+      try{
+        var len = Math.ceil(p.getTotalLength());
+        if(len){ p.style.setProperty('--len', len); }
+      }catch(err){}
+    });
+  });
+
+  /* ---- count up ---- */
+  function runCount(el){
+    var target = parseInt(el.dataset.count,10), dur = 1800, start;
+    function step(now){
+      if(!start) start = now;
+      var p = Math.min((now-start)/dur,1), eased = 1-Math.pow(1-p,3);
+      el.textContent = Math.round(target*eased);
+      if(p<1) requestAnimationFrame(step); else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+  var co = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ runCount(e.target); co.unobserve(e.target); } });
+  }, { threshold: 0.7 });
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    if(reduce){ el.textContent = el.dataset.count; } else { co.observe(el); }
+  });
+
+  /* ---- scroll-driven: progress bar, parallax, the Thread ---- */
+  var bar = document.getElementById('bar');
+  var threadPath = document.getElementById('threadPath');
+  var journey = document.getElementById('journey');
+  var pathLen = 0;
+  if(threadPath){
+    pathLen = threadPath.getTotalLength();
+    threadPath.style.strokeDasharray = pathLen;
+    threadPath.style.strokeDashoffset = reduce ? 0 : pathLen;
+  }
+  var parallax = Array.prototype.slice.call(document.querySelectorAll('[data-speed]'));
+  var ticking = false;
+
+  function update(){
+    ticking = false;
+    var y = window.scrollY || window.pageYOffset, vh = window.innerHeight;
+    var max = document.documentElement.scrollHeight - vh;
+    if(bar){ bar.style.transform = 'scaleX(' + (max>0 ? (y/max) : 0) + ')'; }
+    if(reduce) return;
+
+    for(var i=0;i<parallax.length;i++){
+      var el = parallax[i], r = el.getBoundingClientRect();
+      var offset = (r.top + r.height/2 - vh/2);
+      el.style.transform = 'translate3d(0,' + (offset * parseFloat(el.dataset.speed)).toFixed(1) + 'px,0)';
+    }
+    if(threadPath && journey){
+      var jr = journey.getBoundingClientRect();
+      var startAt = vh * 0.82;
+      var traveled = startAt - jr.top;
+      var p = traveled / (jr.height * 0.78);
+      p = p < 0 ? 0 : (p > 1 ? 1 : p);
+      threadPath.style.strokeDashoffset = pathLen * (1 - p);
+    }
+  }
+  function onScroll(){ if(!ticking){ requestAnimationFrame(update); ticking = true; } }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', function(){
+    if(threadPath){ pathLen = threadPath.getTotalLength(); threadPath.style.strokeDasharray = pathLen; }
+    update();
+  });
+
+  /* ---- nav background ---- */
+  var nav = document.getElementById('nav');
+  function navState(){ nav.classList.toggle('scrolled', (window.scrollY||window.pageYOffset) > 40); }
+  window.addEventListener('scroll', navState, { passive:true });
+  navState(); update();
+
+  /* ---- embers ---- */
+  if(!reduce){
+    var field = document.getElementById('embers');
+    if(field){
+      for(var e=0;e<16;e++){
+        var s = document.createElement('span');
+        s.className = 'ember';
+        s.style.left = (Math.random()*100) + '%';
+        s.style.setProperty('--d', (8 + Math.random()*10) + 's');
+        s.style.setProperty('--delay', (-Math.random()*14) + 's');
+        s.style.setProperty('--x', (Math.random()*60-30) + 'px');
+        s.style.setProperty('--s', (0.4 + Math.random()*1.1).toFixed(2));
+        s.style.opacity = (0.15 + Math.random()*0.5).toFixed(2);
+        field.appendChild(s);
+      }
+    }
+  }
+
+  /* ---- custom cursor (additive) ---- */
+  if(fine && !reduce){
+    var ring = document.getElementById('cursor');
+    ring.style.display = 'block';
+    var rx = window.innerWidth/2, ry = window.innerHeight/2, cx = rx, cy = ry;
+    window.addEventListener('mousemove', function(ev){ rx = ev.clientX; ry = ev.clientY; });
+    (function loop(){
+      cx += (rx-cx)*0.2; cy += (ry-cy)*0.2;
+      ring.style.transform = 'translate(' + (cx-16) + 'px,' + (cy-16) + 'px)';
+      requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a,button,.fact,.word,.dyk,.legend').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ ring.classList.add('big'); });
+      el.addEventListener('mouseleave', function(){ ring.classList.remove('big'); });
+    });
+  }
+
+  /* ---- Slàinte: a wee toast ---- */
+  var slainte = document.getElementById('slainte');
+  if(slainte){
+    slainte.addEventListener('click', function(){
+      if(!reduce) burst(slainte);
+      setTimeout(function(){ window.scrollTo({ top:0, behavior: reduce ? 'auto' : 'smooth' }); }, 650);
+    });
+  }
+  function burst(origin){
+    var rect = origin.getBoundingClientRect();
+    var ox = rect.left + rect.width/2, oy = rect.top + rect.height/2;
+    for(var i=0;i<18;i++){
+      var d = document.createElement('span');
+      d.textContent = '✦';
+      var ang = Math.random()*Math.PI*2, dist = 60 + Math.random()*140;
+      d.style.cssText = 'position:fixed;left:'+ox+'px;top:'+oy+'px;z-index:9600;pointer-events:none;'
+        + 'color:'+(Math.random()>0.5?'#E6C36A':'#A28FCB')+';font-size:'+(10+Math.random()*14)+'px;'
+        + 'transition:transform 1s cubic-bezier(.16,1,.3,1),opacity 1s ease;will-change:transform,opacity';
+      document.body.appendChild(d);
+      (function(node,a,dd){
+        requestAnimationFrame(function(){
+          node.style.transform = 'translate('+(Math.cos(a)*dd)+'px,'+(Math.sin(a)*dd - 30)+'px) rotate('+(Math.random()*360)+'deg)';
+          node.style.opacity = '0';
+        });
+      })(d,ang,dist);
+      setTimeout((function(node){ return function(){ node.remove(); }; })(d), 1100);
+    }
+  }
+})();
+</script>
+</body>
+</html>
